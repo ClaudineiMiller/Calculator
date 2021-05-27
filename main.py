@@ -25,8 +25,8 @@ class Calculator():
         self.frame_display = tk.Frame(self.window)
         self.frame_display.pack(fill=BOTH)
 
-        self.label_result = tk.Label(self.frame_display, text="Label Result", font='Arial 30')
-        self.label_result.pack(fill='x', ipady=30)
+        self.label_espaco = tk.Label(self.frame_display, font='Arial 30')
+        self.label_espaco.pack(fill='x', ipady=30)
 
         self.display = tk.Entry(self.frame_display, font='Arial 20', text=self.inp)
         self.display.pack(fill='x', ipady=10)
@@ -43,31 +43,35 @@ class Calculator():
                     row=i+1, column=j, padx=1, pady=1, ipady=5
                 )
                 self.btn_dict['btn_'+str(list_buttons_names[i][j])].bind('<Button-1>', self.calculate)
+        self.btn_dict['btn_='].grid(column=4, columnspan=2, sticky=E+W)
 
         self.window.mainloop()
 
-        '''['7', '8', '9', '÷', '⌫', 'c'],
-        ['4', '5', '6', 'x', '(', ')'],
-        ['1', '2', '3', '−', 'x²', '√'],
-        ['0', ',', '%', '+', '=']]'''
 
     def calculate(self, event):
         self.button = event.widget.cget('text')
-
         try:
             if self.button == '√':
                 ans = float(self.inp.get())**(0.5)
                 ans_to_print = str(ans)
                 self.inp.set(str(ans))
             elif self.button == 'c':
-                self.display.focus()
                 self.inp.set('')
+                self.display.focus()
             elif self.button == '⌫':
                 self.inp.set(self.inp.get()[:len(self.inp.get())-1])
                 self.display.focus()
             elif self.button == '=':
                 self.ans_to_print = str(eval(self.inp.get()))
                 self.inp.set(self.ans_to_print)
+            elif self.button == 'x²':
+                self.inp.set(self.inp.get() + '**' )
+            elif self.button == 'x':
+                self.inp.set(self.inp.get()+str('*'))
+            elif self.button == '−':
+                self.inp.set(self.inp.get()+str('-'))
+            elif self.button == '÷':
+                self.inp.set(self.inp.get()+str('/'))
             else:
                 self.inp.set(self.inp.get()+str(self.button))
         except:
