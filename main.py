@@ -6,7 +6,7 @@ from tkinter import messagebox as mb
 class Calculator():
     """ Classe principal - chama a janela window com todos os widgets. """
     def __init__(self):
-        """ Inicializador da janela principal. """
+        """ Inicializador da janela principal """
         self.window = ThemedTk(theme='plastik')
         self.window.title("Basic Calculator")
         self.window.resizable(0, 0)
@@ -44,6 +44,8 @@ class Calculator():
                 )
                 self.btn_dict['btn_'+str(list_buttons_names[i][j])].bind('<Button-1>', self.calculate)
         self.btn_dict['btn_='].grid(column=4, columnspan=2, sticky=E+W)
+
+        print(self.btn_dict.values())
 
         self.window.mainloop()
 
